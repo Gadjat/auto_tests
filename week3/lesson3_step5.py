@@ -1,30 +1,19 @@
 from selenium import webdriver
 import time
 import math
-def calc(x):
-  return str(math.log(abs(12*math.sin(int(x)))))
-link = "http://suninjuly.github.io/get_attribute.html"
+link = "https://stepik.org/lesson/236895/step/1"
 
 try:
     browser = webdriver.Chrome()
+    browser.implicitly_wait(5)
     browser.get(link)
+    answer = math.log(int(time.time()))
+    input = browser.find_element_by_class_name("textarea")
+    input.send_keys(str(answer))
+    button = browser.find_element_by_class_name("submit-submission").click()
 
-    x_element = browser.find_element_by_css_selector("#treasure")
-    x = x_element.get_attribute("valuex")
-    y = calc(x)
-
-    input1 = browser.find_element_by_css_selector("#answer")
-    input1.send_keys(y)
-
-    option1 = browser.find_element_by_css_selector("#robotCheckbox")
-    option1.click()
-
-    option2 = browser.find_element_by_css_selector("#robotsRule")
-    option2.click()
-
-    button = browser.find_element_by_xpath("//button[text()='Submit']")
-    button.click()
-
+    text_hits = browser.find_element_by_class_name("smart-hints__hint").text()
+    print(text_hits)
 finally:
     # успеваем скопировать код за 30 секунд
     time.sleep(30)
