@@ -25,6 +25,7 @@ try:
     button = browser.find_element_by_name("registration_submit").click()
 
     welcome_text = browser.find_element_by_class_name("alertinner.wicon").text
+    rrr= browser.current_url
 
     assert "Спасибо за регистрацию!" == welcome_text
 
